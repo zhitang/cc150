@@ -6,9 +6,6 @@ using namespace std;
 
 template <typename T>
 class List {
- private:
-  Node<T> * head;
-  Node<T> * tail;
  public:
   List();
   ~List();
@@ -16,6 +13,9 @@ class List {
   void print();
   Node<T> * search(T);
 
+ private:
+  Node<T> * head;
+  Node<T> * tail;
   bool isEmpty();
   void insertAtFront(T);
   void insertAtEnd(T);
@@ -101,5 +101,27 @@ Node<T> * List<T>::search (T key) {
     else node = node->next;
   }
   return node;
+}
+
+template<typename T>
+void List<T>::insertNewNode (T dataIn) {
+  if (isEmpty()) insertAtFront(dataIn);
+  else {
+    if (dataIn < head->data) insertAtFront(dataIn);
+    else if (dataIn >= tail->data) insertAtEnd(dataIn);
+    else {
+      Node<T> * current = head;
+      Node<T> * newNode = new Node<T>(dataIn);
+      while (current != tail) {
+	if ((newNode->data < current->next->data) && (newNode->data >= current->data)) {
+	  Node<T> * tmp = current->next;
+	  current->next = newNode;
+	  newNode->next = tmp;
+	  break;
+	}
+	current = current->next;
+      }
+    }
+  }
 }
 #endif

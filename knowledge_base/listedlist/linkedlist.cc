@@ -17,7 +17,7 @@ int main() {
   cout << endl;
   List<int> intList;
   for (int i = 0; i < size; i++) {
-    intList.insertAtFront(a[i]);
+    intList.insertNewNode(a[i]);
   }
   intList.print();
   return 1;
